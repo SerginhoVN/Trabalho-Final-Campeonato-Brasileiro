@@ -5,10 +5,7 @@ import requests
 from flask import Flask
 from oauth2client.service_account import ServiceAccountCredentials
 from tchan import ChannelScraper
-import datetime as dtm
-from datetime import date as dt
 
-from unicodedata import normalize as nm
 
 
 
