@@ -40,39 +40,3 @@ def dedoduro():
   resposta = requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
   return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
 
-#programando o Telegram 
-
-@app.route("/campeonatobrasileiro-bot", methods=["POST"])
-def campeonatobrasileiro_bot():
-  update = request.json
-  chat_id = update["message"]["chat"]["id"]
-  message = update["message"]["text"]
-  nova_mensagem = {"chat_id": chat_id, "text": message}
-  requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
-  
-   # Extrai dados para mostrar mensagem recebida
-  first_name = update["message"]["from"]["first_name"]
-  sender_id = update["message"]["from"]["id"]
-  if "text" not in update["message"]:
-    continue  # Essa mensagem não é um texto!
-  message = update["message"]["text"]
-  chat_id = update["message"]["chat"]["id"]
-  if "username" in update["message"]["from"]:
-    username = f' @{update["message"]["from"]["username"]}'
-  else:
-    username = ""
-  print(f"Nova mensagem de {first_name}{username} ({chat_id}): {message}")
-
-  # Define qual será a resposta e envia
-  if message == "Oi":
-    texto_resposta = "Olá! Seja bem-vinda(o). Você quer saber sobre as rodadas do Campeonato Brasileiro "
-  
-  elif message == "Sim":
-     texto_resposta = "Veja os últimos jogos finalizados do Campeonato Brasileiro"
-     for lista in df:
-       texto_resposta = f'{texto_resposta} \n \n{lista}'
-        
-  else:
-    texto_resposta = "Não entendi! Escreva Sim e veja os últimos jogos do Campeonato Brasileiro"
- 
-  return "ok"
