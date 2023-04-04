@@ -5,9 +5,7 @@ import requests
 from flask import Flask
 from oauth2client.service_account import ServiceAccountCredentials
 from tchan import ChannelScraper
-
-
-
+import pandas as pd
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
@@ -39,4 +37,38 @@ def dedoduro():
   mensagem = {"chat_id": TELEGRAM_ADMIN_ID, "text": "Alguém acessou a página dedo duro!"}
   resposta = requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
   return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
+
+#programando o Telegram 
+
+@app.route("/campeonatobrasileiro-bot", methods=["POST"])
+def campeonatobrasileiro_bot():
+    update = request.json
+    chat_id = update["message"]["chat"]["id"]
+    message = update["message"]["text"]
+    nova_mensagem = {"chat_id": chat_id, "text": message}
+    requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  
+    if message == "/start":  
+        texto_resposta = "Olá! Seja bem-vinda(o). Você quer saber sobre qual time do Campeonato Brasileiro?"
+    
+    elif message in ['Palmeiras', 'Flamengo', 'Corinthians', 'Sao Paulo', 'Atletico Mineiro', 'Internacional', 'Ceara', 'Bahia', 'Athletico Paranaense', 'Chapecoense', 'Cuiaba', 'Fluminense', 'Palmeiras', 'Santos', 'America-MG', 'Gremio', 'Fortaleza', 'Sport', 'Red Bull Bragantino', 'Juventude', 'Atletico-GO']:
+        texto_resposta = "Olá! Aqui estão os resultados do {message} na temporada"
+        
+       for lista in df:
+       texto_resposta = f'{texto_resposta} \n \n{lista}'
+        df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_2021_SerieAB.xlsx')
+        dffiltrado = df[(df.mandante == message) | (df.visitante == message)]
+   
+     else:
+      texto_resposta = "Não entendi! Diga Oi e veja as últimas notícias da BR Aviation e Vibra"
+         
+  return "ok"
+
+
+      #incluir pipedream para deixar recorrente 
+
+
+
+
+
 
