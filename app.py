@@ -19,23 +19,6 @@ sheet = planilha.worksheet("Sheet1")
 app = Flask(__name__)
 
 
-def ultimas_promocoes():
-  scraper = ChannelScraper()
-  contador = 0
-  resultado = []
-  for message in scraper.messages("promocoeseachadinhos"):
-    contador += 1
-    texto = message.text.strip().splitlines()[0]
-    resultado.append(f"{message.created_at} {texto}")
-    if contador == 10:
-      return resultado
-
-    
-menu = """
-<a href="/">Página inicial</a> | <a href="/promocoes">PROMOÇÕES</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
-<br>
-"""
-
 @app.route("/")
 def index():
   return menu + "Bem Vindo! Esse site vai te ajudar com dados sobre o Campeonato Brasileiro."
