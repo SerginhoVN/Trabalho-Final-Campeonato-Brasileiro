@@ -54,10 +54,10 @@ def campeonatobrasileiro_bot():
     elif message in ['Palmeiras', 'Flamengo', 'Corinthians', 'Sao Paulo', 'Atletico Mineiro', 'Internacional', 'Ceara', 'Bahia', 'Athletico Paranaense', 'Chapecoense', 'Cuiaba', 'Fluminense', 'Palmeiras', 'Santos', 'America-MG', 'Gremio', 'Fortaleza', 'Sport', 'Red Bull Bragantino', 'Juventude', 'Atletico-GO']:
         texto_resposta = "Olá! Aqui estão os resultados do {message} na temporada"
         
-       for lista in df:
-       texto_resposta = f'{texto_resposta} \n \n{lista}'
+       for message in df:
         df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_2021_SerieAB.xlsx')
         dffiltrado = df[(df.mandante == message) | (df.visitante == message)]
+        texto_resposta = f'{texto_resposta} \n \n{message}'
    
      else:
       texto_resposta = "Não entendi! Diga Oi e veja as últimas notícias da BR Aviation e Vibra"
