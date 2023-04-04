@@ -38,45 +38,28 @@ menu = """
 
 @app.route("/")
 def index():
-  return menu + "Olá, mundo! Esse é meu site. (Sérgio Vieira)"
+  return menu + "Bem Vindo! Esse site vai te ajudar com dados sobre o Campeonato Brasileiro."
 
 @app.route("/sobre")
 def sobre():
-  return menu + "Aqui vai o conteúdo da página Sobre"
+  return menu + "Aqui você encontra dados sobre todas as temporadas do campeonato Brasileiro que foram disponibilizados pela CBF"
 
 @app.route("/contato")
 def contato():
-  return menu + "Aqui vai o conteúdo da página Contato"
+  return menu + "Para saber mais detalhes, mande um oi no usuário Dados Campeonato Brasileiro, no Telegram"
 
 
-@app.route("/promocoes")
-def promocoes():
+@app.route("/Campeonato Brasileiro")
+def campeonato():
   conteudo = menu + """
-  Encontrei as seguintes promoções no <a href="https://t.me/promocoeseachadinhos">@promocoeseachadinhos</a>:
+  Encontrei as seguintes promoções no <a href="https://t.me/campeonatobrasileiro_bot">@campeontobrasileiro_bot</a>:
   <br>
   <ul>
   """
-  for promocao in ultimas_promocoes():
-    conteudo += f"<li>{promocao}</li>"
+  for campbrasil in campeonato():
+    conteudo += f"<li>{campbrasil}</li>"
   return conteudo + "</ul>"
 
-
-@app.route("/promocoes2")
-def promocoes2():
-  conteudo = menu + """
-  Encontrei as seguintes promoções no <a href="https://t.me/promocoeseachadinhos">@promocoeseachadinhos</a>:
-  <br>
-  <ul>
-  """
-  scraper = ChannelScraper()
-  contador = 0
-  for message in scraper.messages("promocoeseachadinhos"):
-    contador += 1
-    texto = message.text.strip().splitlines()[0]
-    conteudo += f"<li>{message.created_at} {texto}</li>"
-    if contador == 10:
-      break
-  return conteudo + "</ul>"
 
 @app.route("/dedoduro")
 def dedoduro():
