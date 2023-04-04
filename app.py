@@ -60,7 +60,7 @@ def campeonatobrasileiro_bot():
         texto_resposta = f'{texto_resposta} \n \n{message}'
    
      else:
-      texto_resposta = "Não entendi! Diga Oi e veja as últimas notícias da BR Aviation e Vibra"
+      texto_resposta = "Não entendi! Diga o nome do seu time sem acento e veja os resultados dele no Campeonato Carioca"
          
   return "ok"
 
