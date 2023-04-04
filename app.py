@@ -37,18 +37,6 @@ def contato():
   return menu + "Para saber mais detalhes, mande um oi no usuário Dados Campeonato Brasileiro, no Telegram"
 
 
-@app.route("/Campeonato Brasileiro")
-def campeonato():
-  conteudo = menu + """
-  Encontrei as seguintes promoções no <a href="https://t.me/campeonatobrasileiro_bot">@campeontobrasileiro_bot</a>:
-  <br>
-  <ul>
-  """
-  for campbrasil in campeonato():
-    conteudo += f"<li>{campbrasil}</li>"
-  return conteudo + "</ul>"
-
-
 @app.route("/dedoduro")
 def dedoduro():
   mensagem = {"chat_id": TELEGRAM_ADMIN_ID, "text": "Alguém acessou a página dedo duro!"}
@@ -56,13 +44,8 @@ def dedoduro():
   return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
 
 
-@app.route("/dedoduro2")
-def dedoduro2():
-  sheet.append_row(["Sérgio", "Vieira", "a partir do Flask"])
-  return "Planilha escrita!"
-
-@app.route("/telegram-bot", methods=["POST"])
-def telegram_bot():
+@app.route("/campeonatobrasileiro-bot", methods=["POST"])
+def campeonatobrasileiro_bot():
   update = request.json
   chat_id = update["message"]["chat"]["id"]
   message = update["message"]["text"]
