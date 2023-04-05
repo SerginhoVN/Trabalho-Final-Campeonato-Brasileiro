@@ -48,21 +48,22 @@ def campeonatobrasileiro_bot():
     requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
  
     
-    if message == "/start":
-        texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
+if message == "/start":
+  texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
     
-    elif message in ['Palmeiras', 'Flamengo', 'Corinthians', 'Sao Paulo', 'Atletico Mineiro', 'Internacional', 'Ceara', 'Bahia', 'Athletico Paranaense', 'Chapecoense', 'Cuiaba', 'Fluminense', 'Santos', 'America-MG', 'Gremio', 'Fortaleza', 'Sport', 'Red Bull Bragantino', 'Juventude', 'Atletico-GO']:
-        df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
-        dffiltrado = df[(df.mandante == message) | (df.visitante == message)]
-        texto_resposta = f"Aqui estão os resultados do {message} na temporada:\n{dffiltrado.to_string(index=False)}"
+elif message in ['Palmeiras', 'Flamengo', 'Corinthians', 'Sao Paulo', 'Atletico Mineiro', 'Internacional', 'Ceara', 'Bahia', 'Athletico Paranaense', 'Chapecoense', 'Cuiaba', 'Fluminense', 'Santos', 'America-MG', 'Gremio', 'Fortaleza', 'Sport', 'Red Bull Bragantino', 'Juventude', 'Atletico-GO']:
+  df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
+  dffiltrado = df[(df.mandante == message) | (df.visitante == message)]
+  texto_resposta = f"Aqui estão os resultados do {message} na temporada:\n{dffiltrado.to_string(index=False)}"
+  
+else:
+  texto_resposta = "Não entendi! Diga /start para começar."
+  
     
-    else:
-        texto_resposta = "Não entendi! Diga /start para começar."
-    
-    nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
-    requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
-    
-    return "ok"
+nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
+requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+
+return "ok"
 
       #incluir pipedream para deixar recorrente 
 
