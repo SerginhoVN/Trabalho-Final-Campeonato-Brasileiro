@@ -17,6 +17,10 @@ planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM")
 sheet = planilha.worksheet("Sheet1")
 app = Flask(__name__)
 
+menu = """
+<a href="/">Página inicial</a> | <a href="/campeonato brasileiro">Campeonato Brasileiro</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
+<br>
+"""
 
 @app.route("/")
 def index():
@@ -36,7 +40,4 @@ def dedoduro():
   mensagem = {"chat_id": TELEGRAM_ADMIN_ID, "text": "Alguém acessou a página dedo duro!"}
   resposta = requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
   return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
-
-
-
 
