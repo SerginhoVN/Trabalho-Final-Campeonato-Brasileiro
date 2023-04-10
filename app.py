@@ -69,13 +69,13 @@ def dedoduro2():
 #Telegram
 
 
- @app.route("/campeonatobrasileiro-bot", methods=["POST"])
- def campeonatobrasileiro_bot():
-     update = request.json
-     chat_id = update["message"]["chat"]["id"]
-     message = update["message"]["text"]
+  @app.route("/campeonatobrasileiro-bot", methods=["POST"])
+  def campeonatobrasileiro_bot():
+    update = request.json
+    chat_id = update["message"]["chat"]["id"]
+    message = update["message"]["text"]
  
-     times = ['Palmeiras', 
+    times = ['Palmeiras', 
               'Flamengo', 
               'Corinthians', 
               'Sao Paulo', 
@@ -97,19 +97,20 @@ def dedoduro2():
               'Atletico-GO']
      
      if message == "oi":
-         texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
+       texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
      
      elif message in times:
-         df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
-         dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
-         atual = dffiltrado["Temporada"].max()
-         dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
-         texto_resposta = f"Aqui estão os resultados do {message} na temporada {atual}:\n\n" 
-         jogos = dffiltrado.to_dict('records')
-         for jogo in jogos:
-             texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
+       df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
+       dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
+       atual = dffiltrado["Temporada"].max()
+       dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
+       texto_resposta = f"Aqui estão os resultados do {message} na temporada {atual}:\n\n" 
+       jogos = dffiltrado.to_dict('records')
+       for jogo in jogos:
+           texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
+          
      else:
-         texto_resposta = "Não entendi! Diga 'oi' para começar."
+       texto_resposta = "Não entendi! Diga 'oi' para começar."
    
      nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
      requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
