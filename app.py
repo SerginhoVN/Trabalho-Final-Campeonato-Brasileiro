@@ -65,12 +65,6 @@ def campeonatobrasileiro_bot():
     update = request.json
     chat_id = update["message"]["chat"]["id"]  
     update = request.json
-    chat_id = update["message"]["chat"]["id"]
-    message = update["message"]["text"]
-    
-    #if message == "/start":
-    if message == "oi":
-        texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
     
     times = ['Palmeiras', 
              'Flamengo', 
@@ -92,6 +86,11 @@ def campeonatobrasileiro_bot():
              'Red Bull Bragantino', 
              'Juventude', 
              'Atletico-GO']
+    
+    #if message == "/start":
+    if message == "oi":
+        texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
+    
  
     elif message in times:
       df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
@@ -108,8 +107,8 @@ def campeonatobrasileiro_bot():
         
     else:
       texto_resposta = "Não entendi! Diga 'oi' para começar."
-
-nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
-requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem,)
+      
+      nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
+      requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem,)
     
 return "ok"
