@@ -93,20 +93,20 @@ def campeonatobrasileiro_bot():
     
  
     elif message in times:
-      df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
-      dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
-      atual = dffiltrado["Temporada"].max()
-      dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
-      texto_resposta = []
-      jogos = dffiltrado.to_dict("records")
+        df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
+        dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
+        atual = dffiltrado["Temporada"].max()
+        dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
+        texto_resposta = []
+        jogos = dffiltrado.to_dict("records")
       
-      for jogo in jogos:
-        texto_resposta.append(str(jogo).replace('{', '').replace("'",'').replace(',','\n'))
-        texto_resposta = f"Jogos do time {message}\n\n" + '\n'.join(texto_resposta)
+        for jogo in jogos:
+            texto_resposta.append(str(jogo).replace('{', '').replace("'",'').replace(',','\n'))
+            texto_resposta = f"Jogos do time {message}\n\n" + '\n'.join(texto_resposta)
           
         
     else:
-      texto_resposta = "Não entendi! Diga 'oi' para começar."
+        texto_resposta = "Não entendi! Diga 'oi' para começar."
       
     nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
     requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem,)
