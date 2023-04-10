@@ -93,7 +93,7 @@ def campeonatobrasileiro_bot():
     
  
     elif message in times:
-        df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
+        df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
         dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
         atual = dffiltrado["Temporada"].max()
         dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
