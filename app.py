@@ -39,9 +39,8 @@ def contato():
 
 @app.route("/campeonato-brasileiro/2021")
 def campeonato_brasileiro(ano):
-  df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
+  df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
   df = df[df["Temporada"] == int(ano)]
-  
   html = f"<h1>{ano}<h/h'>"
   for ano in df["Temporada"].unique():
     html += f'<a href="/campeonato brasileiro/{ano}>{ano}<a/a> |'
@@ -95,7 +94,7 @@ def campeonatobrasileiro_bot():
              'Atletico-GO']
  
     elif message in times:
-      df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
+      df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
       dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
       atual = dffiltrado["Temporada"].max()
       dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
