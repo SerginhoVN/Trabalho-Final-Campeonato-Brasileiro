@@ -43,7 +43,7 @@ def campeonato_brasileiro(ano):
   df = df[df["Temporada"] == int(ano)]
   
   html = f"<h1>{ano}<h/h'>"
-  for ano in df["Temporada"]unique():
+  for ano in df["Temporada"].unique():
     html += f'<a href="/campeonato brasileiro/{ano}>{ano}<a/a> |'
     html += df.to_html()
   return html
@@ -65,13 +65,6 @@ def dedoduro2():
 def campeonatobrasileiro_bot():
     update = request.json
     chat_id = update["message"]["chat"]["id"]
-  
-  debug_message = {"chat_id": update["message"]["id"], "text": "funcionou!"}
-  requests.post(
-    f" #requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", 
-    data=debug_message,
-  )
-  
     update = request.json
     chat_id = update["message"]["chat"]["id"]
     message = update["message"]["text"]
@@ -105,16 +98,13 @@ def campeonatobrasileiro_bot():
  
     elif message in times:
         df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
-        
         dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
         atual = dffiltrado["Temporada"].max()
         dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
-        #texto_resposta = f"Aqui estão os resultados do {message} na temporada:\n{dffiltrado.to_string(index=False)}"
         texto_resposta = []
         jogos = dffiltrado.to_dict("records")
         for jogo in jogos:
             texto_resposta.append(str(jogo).replace('{', '').replace("'",'').replace(',','\n'))
-        
             texto_resposta = f"Jogos do time {message}\n\n" + '\n'.join(texto_resposta)
           
            
@@ -126,6 +116,3 @@ def campeonatobrasileiro_bot():
         requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem,)
     
     return "ok"
-
-
-
