@@ -19,7 +19,19 @@ sheet = planilha.worksheet("Sheet1")
 app = Flask(__name__)
 
 menu = """
-<a href="/">Página inicial</a> | <a href="/campeonato brasileiro">Campeonato Brasileiro</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
+<a href="/">Página inicial</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro </a> | 
+<a href="/campeonato brasileiro/2020">Campeonato Brasileiro 2020</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2019</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2018</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2017</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2016</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2015</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2014</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2013</a> | 
+<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2012</a> | 
+<a href="/sobre">Sobre</a> | 
+<a href="/contato">Contato</a>
 <br>
 """
 
@@ -36,9 +48,15 @@ def contato():
   return menu + "Para saber mais detalhes, mande um oi no usuário Dados Campeonato Brasileiro, no Telegram"
 
 @app.route("/campeonato-brasileiro")
-def campeonato_brasileiro():
+def campeonato_brasileiro(ano):
   pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
-  return df.to_html()
+  df = df[df["Temporada"] == int(ano)]
+  
+  html = f"<h1>{ano}<h/h'>"
+  for ano in df["Temporada"]unique():
+    html += f'<a href="/campeonato brasileiro/{ano}>{ano}<a/a> |'
+    html += df.to_html()
+  return html
 
 @app.route("/dedoduro")
 def dedoduro():
