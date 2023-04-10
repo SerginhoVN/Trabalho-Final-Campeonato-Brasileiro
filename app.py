@@ -21,15 +21,6 @@ app = Flask(__name__)
 menu = """
 <a href="/">Página inicial</a> | 
 <a href="/campeonato brasileiro/2021">Campeonato Brasileiro </a> | 
-<a href="/campeonato brasileiro/2020">Campeonato Brasileiro 2020</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2019</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2018</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2017</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2016</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2015</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2014</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2013</a> | 
-<a href="/campeonato brasileiro/2021">Campeonato Brasileiro 2012</a> | 
 <a href="/sobre">Sobre</a> | 
 <a href="/contato">Contato</a>
 <br>
