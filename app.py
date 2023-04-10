@@ -99,7 +99,7 @@ def dedoduro2():
      if message == "oi":
          texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
      
-    elif message in times:
+     elif message in times:
          df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
          dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
          atual = dffiltrado["Temporada"].max()
@@ -113,5 +113,4 @@ def dedoduro2():
    
      nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
      requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
-     
      return "ok"
