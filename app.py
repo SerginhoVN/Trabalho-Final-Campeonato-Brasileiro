@@ -39,7 +39,7 @@ def contato():
 
 @app.route("/campeonato-brasileiro/2021")
 def campeonato_brasileiro(ano):
-  pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
+  df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
   df = df[df["Temporada"] == int(ano)]
   
   html = f"<h1>{ano}<h/h'>"
