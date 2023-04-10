@@ -5,6 +5,7 @@ from flask import Flask, request
 from oauth2client.service_account import ServiceAccountCredentials
 from tchan import ChannelScraper
 import pandas as pd
+import openpyxl
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
@@ -34,6 +35,10 @@ def sobre():
 def contato():
   return menu + "Para saber mais detalhes, mande um oi no usuário Dados Campeonato Brasileiro, no Telegram"
 
+@app.route("/campeonato-brasileiro")
+def campeonato_brasileiro():
+  pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
+  return df.to_html()
 
 @app.route("/dedoduro")
 def dedoduro():
