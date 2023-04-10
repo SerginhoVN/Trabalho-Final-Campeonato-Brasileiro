@@ -71,7 +71,26 @@ def campeonatobrasileiro_bot():
     #if message == "/start":
     if message == "oi":
         texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
-    elif message in ['Palmeiras', 'Flamengo', 'Corinthians', 'Sao Paulo', 'Atletico Mineiro', 'Internacional', 'Ceara', 'Bahia', 'Athletico Paranaense', 'Chapecoense', 'Cuiaba', 'Fluminense', 'Santos', 'America-MG', 'Gremio', 'Fortaleza', 'Sport', 'Red Bull Bragantino', 'Juventude', 'Atletico-GO']:
+    elif message in ['Palmeiras', 
+                     'Flamengo', 
+                     'Corinthians', 
+                     'Sao Paulo', 
+                     'Atletico Mineiro', 
+                     'Internacional', 
+                     'Ceara', 
+                     'Bahia', 
+                     'Athletico Paranaense', 
+                     'Chapecoense', 
+                     'Cuiaba', 
+                     'Fluminense', 
+                     'Santos', 
+                     'America-MG', 
+                     'Gremio', 
+                     'Fortaleza', 
+                     'Sport', 
+                     'Red Bull Bragantino', 
+                     'Juventude', 
+                     'Atletico-GO']:
         df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
         #dffiltrado = df[(df.mandante == message) | (df.visitante == message)]
         dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
