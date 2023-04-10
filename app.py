@@ -64,7 +64,7 @@ def dedoduro2():
 @app.route("/campeonatobrasileiro-bot", methods=["POST"])
 def campeonatobrasileiro_bot():
     update = request.json
-    chat_id = update["message"]["chat"]["id"]
+    chat_id = update["message"]["chat"]["id"]  
     update = request.json
     chat_id = update["message"]["chat"]["id"]
     message = update["message"]["text"]
@@ -94,25 +94,25 @@ def campeonatobrasileiro_bot():
              'Sport', 
              'Red Bull Bragantino', 
              'Juventude', 
-             'Atletico-GO']:
+             'Atletico-GO']
  
     elif message in times:
-        df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
-        dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
-        atual = dffiltrado["Temporada"].max()
-        dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
-        texto_resposta = []
-        jogos = dffiltrado.to_dict("records")
-        for jogo in jogos:
-            texto_resposta.append(str(jogo).replace('{', '').replace("'",'').replace(',','\n'))
-            texto_resposta = f"Jogos do time {message}\n\n" + '\n'.join(texto_resposta)
+      df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_2021_SerieAB.xlsx')
+      dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
+      atual = dffiltrado["Temporada"].max()
+      dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
+      texto_resposta = []
+      jogos = dffiltrado.to_dict("records")
+      
+      for jogo in jogos:
+        texto_resposta.append(str(jogo).replace('{', '').replace("'",'').replace(',','\n'))
+        texto_resposta = f"Jogos do time {message}\n\n" + '\n'.join(texto_resposta)
           
-           
+        
     else:
-        #texto_resposta = "Não entendi! Diga /start para começar."
-        texto_resposta = "Não entendi! Diga 'oi' para começar."
-  
-        nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
-        requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem,)
+      texto_resposta = "Não entendi! Diga 'oi' para começar."
+
+nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
+requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem,)
     
-    return "ok"
+return "ok"
