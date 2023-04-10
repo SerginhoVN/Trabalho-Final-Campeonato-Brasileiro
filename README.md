@@ -15,7 +15,7 @@ Todos os códigos foram desenvolvidos em Python e estão preparados para captura
 Jogos: [Campeonato Brasileiro - CBF - Jogos.ipynb](https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/49d7067405e72f469adfee4ea0ef29a3479b8112/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx)
 
 # Dados
-Os dados que são capturados pelos códigos foram armazenados em um arquivo único xlsx.
+Os dados que são capturados pelos códigos foram armazenados em um [arquivo único xlsx](https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/49d7067405e72f469adfee4ea0ef29a3479b8112/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx).
 
 # Telegram 
 
