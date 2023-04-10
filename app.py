@@ -44,9 +44,7 @@ def campeonato_brasileiro(ano):
   df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/raw/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx', engine='openpyxl')
   df = df[df["Temporada"] == int(ano)]
   html = f"<h1>{ano}</h1>"
-  for ano in df["Temporada"].unique():
-    html += f'<a href="/campeonato brasileiro/{ano}>{ano}<a/a> |'
-    html += df.to_html()
+  html += df.to_html()
   return html
 
 @app.route("/dedoduro")
