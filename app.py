@@ -69,7 +69,7 @@ def dedoduro2():
 #Telegram
 
 @app.route("/campeonatobrasileiro-bot", methods=["POST"])
-  def campeonatobrasileiro_bot():
+def campeonatobrasileiro_bot():
   update = request.json
   chat_id = update["message"]["chat"]["id"]
   message = update["message"]["text"]
@@ -106,8 +106,8 @@ def dedoduro2():
     texto_resposta = f"Aqui estão os resultados do {message} na temporada {atual}:\n\n" 
     jogos = dffiltrado.to_dict('records')
     
-   for jogo in jogos:
-     texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
+    for jogo in jogos:
+      texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
        
           
    else:
