@@ -20,6 +20,8 @@ app = Flask(__name__)
 menu = """
 <a href="/">Página inicial</a> | 
 <a href="/campeonato-brasileiro/2021">Campeonato Brasileiro </a> | 
+<a href="/campeonato-brasileiro/2020">Campeonato Brasileiro </a> | 
+<a href="/campeonato-brasileiro/2019">Campeonato Brasileiro </a> | 
 <a href="/sobre">Sobre</a> | 
 <a href="/contato">Contato</a>
 <br>
