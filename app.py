@@ -37,7 +37,7 @@ def sobre():
 def contato():
   return menu + "Para saber mais detalhes, mande um oi no usuário Dados Campeonato Brasileiro, no Telegram"
 
-@app.route("/campeonato-brasileiro/2021")
+@app.route("/campeonato-brasileiro/<ano>")
 def campeonato_brasileiro(ano):
   df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
   df = df[df["Temporada"] == int(ano)]
