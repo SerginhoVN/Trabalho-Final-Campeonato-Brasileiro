@@ -39,7 +39,7 @@ def contato():
 
 @app.route("/campeonato-brasileiro/<ano>")
 def campeonato_brasileiro(ano):
-  df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx')
+  df = pd.read_excel('https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/main/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx', engine='openpyxl')
   df = df[df["Temporada"] == int(ano)]
   html = f"<h1>{ano}<h/h'>"
   for ano in df["Temporada"].unique():
