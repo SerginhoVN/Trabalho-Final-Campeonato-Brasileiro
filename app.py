@@ -6,8 +6,9 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import openpyxl
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Mail, Email, To, Content
 
+SENDGRID_KEY = os.environ["API_SENDGRID"]
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
@@ -15,8 +16,10 @@ with open("credenciais.json", mode="w") as arquivo:
   arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
 conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
-planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM")
-sheet = planilha.worksheet("Sheet1")
+
+#Planilhas do bot Campeonato Brasileiro do Telegram
+planilha = api.open_by_key("14jvq5dfYVerz8V_xyYIa0DEkSjz1DgwWQcHM7BsOcys/edit?hl=pt-br#gid=0")
+sheet = planilha.worksheet("CampeonatoBrasileiro")
 app = Flask(__name__)
 
 menu = """
@@ -112,37 +115,32 @@ def campeonatobrasileiro_bot():
       texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
       texto_resposta += f"Quer receber por email? informe seu email."
     
-    elif message2 == " ":
-      mensagem2 = Mail(
-        Email("sergio.vieira@inpresspni.com.br"),
-        To(" "),
-        "Email em HTML!",
-        Content("text/html", conteudo),
-      )
-      resposta = carteiro.client.mail.send.post(request_body=mensagem2.get())
-      print(resposta.status_code)
-        
+  elif "@" in message:
+      texto_resposta = "Obrigado! Vamos te cadastrar para receber as informações solicitadas"
+   
   else:
      texto_resposta = "Não entendi! Diga 'oi' para começar."
    
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
   requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  mensagens.append([datahora, "enviada", first_name, chat_id, texto_resposta])
+  CampeonatoBrasileiro.append_row([datahora, first_name, chat_id, message])  
   return "ok"
 
 #Sendgrid
-
+@app.route("/send-email")
 def send_email():
-    message2 = Mail(
-        from_email='<sergio.vieira@inpresspni.com.br>',
-        to_emails='< >',
-        subject='<Campeonato Brasileiro>',
-        html_content='<Veja os jogos do {message}>'
+    emails=[]
+  respostas = CampeonatoBrasileiro.col_values(4)
+  for resposta in respostas:
+    if "@" in resposta:
+      emails.append(resposta)
+  message = Mail(
+    from_email='sergio.vieira@inpresspni.com.br',
+    to_emails='serginho.vieira.rio@gmail.com',
+    subject='Campeonato Brasileiro',
+    html_content=f'Confira as últimas rodadas do {message}:'
     )
-    try:
-        sg = SendGridAPIClient('<API_SENDGRID>')
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
-    except Exception as e:
-        print(e)
+  sg = SendGridAPIClient(SENDGRID_KEY)
+  response = sg.send(message)
+  return "ok"
