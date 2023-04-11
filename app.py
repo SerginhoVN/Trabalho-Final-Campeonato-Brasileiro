@@ -131,15 +131,15 @@ def campeonatobrasileiro_bot():
 @app.route("/send-email")
 def send_email():
     emails=[]
-  respostas = CampeonatoBrasileiro.col_values(4)
-  for resposta in respostas:
-    if "@" in resposta:
-      emails.append(resposta)
-  message = Mail(
-    from_email='sergio.vieira@inpresspni.com.br',
-    to_emails='serginho.vieira.rio@gmail.com',
-    subject='Campeonato Brasileiro',
-    html_content=f'Confira as últimas rodadas do {message}:'
+    respostas = CampeonatoBrasileiro.col_values(4)
+    for resposta in respostas:
+      if "@" in resposta:
+        emails.append(resposta)
+    message = Mail(
+      from_email='sergio.vieira@inpresspni.com.br',
+      to_emails='serginho.vieira.rio@gmail.com',
+      subject='Campeonato Brasileiro',
+      html_content=f'Confira as últimas rodadas do {message}:'
     )
   sg = SendGridAPIClient(SENDGRID_KEY)
   response = sg.send(message)
