@@ -5,6 +5,8 @@ from flask import Flask, request
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import openpyxl
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
@@ -108,11 +110,39 @@ def campeonatobrasileiro_bot():
     
     for jogo in jogos:
       texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
-       
-          
+      texto_resposta += f"Quer receber por email? informe seu email."
+    
+    elif message2 == " ":
+      mensagem2 = Mail(
+        Email("sergio.vieira@inpresspni.com.br"),
+        To(" "),
+        "Email em HTML!",
+        Content("text/html", conteudo),
+      )
+      resposta = carteiro.client.mail.send.post(request_body=mensagem2.get())
+      print(resposta.status_code)
+        
   else:
      texto_resposta = "Não entendi! Diga 'oi' para começar."
    
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
   requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
   return "ok"
+
+#Sendgrid
+
+def send_email():
+    message2 = Mail(
+        from_email='<sergio.vieira@inpresspni.com.br>',
+        to_emails='< >',
+        subject='<Campeonato Brasileiro>',
+        html_content='<Veja os jogos do {message}>'
+    )
+    try:
+        sg = SendGridAPIClient('<API_SENDGRID>')
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e)
