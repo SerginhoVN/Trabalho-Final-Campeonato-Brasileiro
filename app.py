@@ -141,6 +141,6 @@ def send_email():
       subject='Campeonato Brasileiro',
       html_content=f'Confira as últimas rodadas do {message}:'
     )
-  sg = SendGridAPIClient(SENDGRID_KEY)
-  response = sg.send(message)
-  return "ok"
+    sg = SendGridAPIClient(SENDGRID_KEY)
+    response = sg.send(message)
+    return "ok"
