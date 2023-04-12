@@ -100,7 +100,7 @@ def campeonatobrasileiro_bot():
            'Juventude', 
             'Atletico-GO']
      
-  if message == "oi":
+if message == "oi":
     texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
      
   elif message in times:
@@ -108,23 +108,33 @@ def campeonatobrasileiro_bot():
     dffiltrado = df[(df.Mandante == message) | (df.Visitante == message)]
     atual = dffiltrado["Temporada"].max()
     dffiltrado = dffiltrado[dffiltrado["Temporada"] == atual]
-    texto_resposta = f"Aqui estão os resultados do {message} na temporada {atual}:\n\n" 
+    texto_resposta_time = f"Aqui estão os resultados do {message} na temporada {atual}:\n\n" 
     jogos = dffiltrado.to_dict('records')
     
     for jogo in jogos:
-      texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
-    texto_resposta += f"Quer receber por email? informe seu email."
+      texto_resposta_time += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
+      texto_resposta_time += f"Quer receber por email? informe seu email."
     
   elif "@" in message:
       texto_resposta = "Obrigado! Vamos te cadastrar para receber as informações solicitadas"
+      email = Mail(
+      from_email='sergio.vieira@inpresspni.com.br',
+      to_emails=message,
+      subject='Campeonato Brasileiro',
+      html_content = texto_resposta_time
+      )
+      sg = SendGridAPIClient(SENDGRID_KEY)
+      response = sg.send(email)
    
   else:
      texto_resposta = "Não entendi! Diga 'oi' para começar."
-   
+
+  if texto_resposta_time:
+    texto_resposta = texto_resposta_time 
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
   requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
   mensagens.append([datahora, "enviada", first_name, chat_id, texto_resposta])
-  sheet.append_row([datahora, first_name, chat_id, message])  
+  CampeonatoBrasileiro.append_row([datahora, first_name, chat_id, message])  
   return "ok"
 
 #Sendgrid
