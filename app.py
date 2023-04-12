@@ -139,7 +139,7 @@ def send_email():
       from_email='sergio.vieira@inpresspni.com.br',
       to_emails='serginho.vieira.rio@gmail.com',
       subject='Campeonato Brasileiro',
-      html_content=f'Confira as últimas rodadas do {message}:'
+      html_content=f'Confira as últimas rodadas do seu time:'
     )
     sg = SendGridAPIClient(SENDGRID_KEY)
     response = sg.send(message)
