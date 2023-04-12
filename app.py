@@ -132,11 +132,11 @@ else:
 if texto_resposta_time:
     texto_resposta = texto_resposta_time 
   
-nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
-requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
-mensagens.append([datahora, "enviada", first_name, chat_id, texto_resposta])
-CampeonatoBrasileiro.append_row([datahora, first_name, chat_id, message])  
-return "ok"
+    nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
+    requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+    mensagens.append([datahora, "enviada", first_name, chat_id, texto_resposta])
+    sheet.append_row([datahora, first_name, chat_id, message])  
+    return "ok"
 
 #Sendgrid
 @app.route("/send-email")
