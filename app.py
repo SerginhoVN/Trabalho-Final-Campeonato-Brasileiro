@@ -113,7 +113,7 @@ def campeonatobrasileiro_bot():
     
     for jogo in jogos:
       texto_resposta += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
-      texto_resposta += f"Quer receber por email? informe seu email."
+    texto_resposta += f"Quer receber por email? informe seu email."
     
   elif "@" in message:
       texto_resposta = "Obrigado! Vamos te cadastrar para receber as informações solicitadas"
@@ -124,14 +124,14 @@ def campeonatobrasileiro_bot():
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
   requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
   mensagens.append([datahora, "enviada", first_name, chat_id, texto_resposta])
-  CampeonatoBrasileiro.append_row([datahora, first_name, chat_id, message])  
+  sheet.append_row([datahora, first_name, chat_id, message])  
   return "ok"
 
 #Sendgrid
 @app.route("/send-email")
 def send_email():
     emails=[]
-    respostas = CampeonatoBrasileiro.col_values(4)
+    respostas = sheet.col_values(4)
     for resposta in respostas:
       if "@" in resposta:
         emails.append(resposta)
