@@ -18,7 +18,7 @@ conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
 
 #Planilhas do bot Campeonato Brasileiro do Telegram
-planilha = api.open_by_key("14jvq5dfYVerz8V_xyYIa0DEkSjz1DgwWQcHM7BsOcys/edit?hl=pt-br#gid=0")
+planilha = api.open_by_key("14jvq5dfYVerz8V_xyYIa0DEkSjz1DgwWQcHM7BsOcys")
 sheet = planilha.worksheet("CampeonatoBrasileiro")
 app = Flask(__name__)
 
