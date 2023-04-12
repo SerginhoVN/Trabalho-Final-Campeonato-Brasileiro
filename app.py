@@ -136,7 +136,7 @@ if texto_resposta_time:
     requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
     mensagens.append([datahora, "enviada", first_name, chat_id, texto_resposta])
     sheet.append_row([datahora, first_name, chat_id, message])  
-  return "ok"
+    return "ok"
 
 #Sendgrid
 @app.route("/send-email")
