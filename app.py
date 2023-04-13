@@ -18,7 +18,7 @@ conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
 
 #Planilhas do bot Campeonato Brasileiro do Telegram
-planilha = api.open_by_key("14jvq5dfYVerz8V_xyYIa0DEkSjz1DgwWQcHM7BsOcys").sheet
+planilha = api.open_by_key("14jvq5dfYVerz8V_xyYIa0DEkSjz1DgwWQcHM7BsOcys")
 sheet = planilha.worksheet("CampeonatoBrasileiro")
 app = Flask(__name__)
 
@@ -118,7 +118,7 @@ def campeonatobrasileiro_bot():
   elif "@" in message:
       texto_resposta = "Obrigado! Vamos te cadastrar para receber as informações solicitadas"
       email = Mail(
-      from_email='aula-google-sheet@serginho.iam.gserviceaccount.com',
+      from_email='serginho.vieira.rio@gmail.com',
       to_emails=message,
       subject='Campeonato Brasileiro',
       html_content = texto_resposta_time
