@@ -115,7 +115,7 @@ def campeonatobrasileiro_bot():
     
       for jogo in jogos:
         texto_resposta_time += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"
-       texto_resposta_time += f"Quer receber por email? informe seu email."
+      texto_resposta_time += f"Quer receber por email? informe seu email."
     
   elif "@" in message:
       texto_resposta = "Obrigado! Vamos te cadastrar para receber as informações solicitadas"
