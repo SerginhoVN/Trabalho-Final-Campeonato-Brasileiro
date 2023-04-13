@@ -98,7 +98,7 @@ def campeonatobrasileiro_bot():
            'Sport', 
            'Red Bull Bragantino', 
            'Juventude', 
-            'Atletico-GO']
+           'Atletico-GO']
      
   texto_resposta_time = None
   
