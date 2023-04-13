@@ -100,7 +100,7 @@ def campeonatobrasileiro_bot():
            'Juventude', 
             'Atletico-GO']
      
-  if message == "oi":
+  if message == "Oi":
       texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
      
   elif message in times:
