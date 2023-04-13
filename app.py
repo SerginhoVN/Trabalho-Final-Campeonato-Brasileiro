@@ -100,6 +100,8 @@ def campeonatobrasileiro_bot():
            'Juventude', 
             'Atletico-GO']
      
+  texto_resposta_time = None
+  
   if message == "Oi":
       texto_resposta = "Olá! Seja bem-vindo(a). Qual time você gostaria de saber os resultados na temporada?"
      
