@@ -125,6 +125,7 @@ def campeonatobrasileiro_bot():
       subject='Campeonato Brasileiro',
       html_content = f"Confira as últimas rodadas do seu time"
       )
+      print(texto_resposta_time)
       sg = SendGridAPIClient(SENDGRID_KEY)
       response = sg.send(email)
    
