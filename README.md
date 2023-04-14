@@ -1,6 +1,6 @@
 # Trabalho Final Campeonato Brasileiro
 
-Este repositório contem os códigos que criei para baixar todas as temporadas do Campeonato Brasileiro disponíveis no site da CBF. Os códigos para capturar os dados contêm os jogos do Campeonato Brasileiro das séries A e B, disponíveis no site da CBF.
+Este repositório contem os códigos que criei para baixar todas as temporadas do Campeonato Brasileiro disponíveis no site da CBF. Os códigos para capturar os dados contêm os jogos do Campeonato Brasileiro das séries A e B, disponíveis a partir de 2021.
 
 Dados dos jogos a partir de 2012: Clique aqui para ler e [baixar](https://github.com/SerginhoVN/Trabalho-Final-Campeonato-Brasileiro/blob/49d7067405e72f469adfee4ea0ef29a3479b8112/Jogos_Temporada_%20Todas%20as%20Temporadas_SerieAB.xlsx) o arquivo.
 
