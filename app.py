@@ -123,7 +123,7 @@ def campeonatobrasileiro_bot():
       from_email='serginhosp21@gmail.com',
       to_emails=message,
       subject='Campeonato Brasileiro',
-      html_content = f"Confira as últimas rodadas do {message in times}"
+      html_content = f"Confira as últimas rodadas do {texto_resposta_time += f"Rodada: {jogo['Rodada']} - {jogo['Mandante']} {jogo['Placar']} {jogo['Visitante']}\n"}"
       )
       sg = SendGridAPIClient(SENDGRID_KEY)
       response = sg.send(email)
